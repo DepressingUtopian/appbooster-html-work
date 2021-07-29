@@ -1,0 +1,44 @@
+@import "./components/button";
+@import "./components/input";
+@import "./mixins";
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  max-height: 40px;
+  padding-bottom: 40px;
+ 
+  .search-form {
+    display: flex;
+
+    .search-form__input {
+      min-width: 240px;
+      margin-right: 20px;
+    }
+
+    .search-form__buttons {
+      display: flex;
+      .button:first-child {
+        border-radius: 5px 0 0 5px;
+      }
+
+      .button:last-child {
+        border-radius: 0 5px 5px 0;
+      }
+    }
+  }
+
+  .control {
+    button {
+      &:first-child {
+        margin-right: 20px;
+      }
+    }
+    .control-button {
+      &.secondary {
+        min-width: 169px;
+        @include calcWidthByTemplate(169px);
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+$templateHeight: 934px;
+$templateWidth: 1080px;
+
+@mixin calcHeightByTemplate($baseHeight) {
+  height: $baseHeight / $templateHeight * 100vh;
+}
+
+@mixin calcWidthByTemplate($baseWidth) {
+  width: $baseWidth / $templateWidth * 100vw;
+}
+
+

@@ -1,0 +1,43 @@
+@import "header";
+@import "banner";
+@import "checkbox";
+@import "table";
+@import "icons";
+
+@font-face {
+  font-family: "HarmoniaSansProCyr-Bold";
+  src: local("HarmoniaSansProCyr-Bold"),
+    url("https://nomail.com.ua/files/woff/ad00ae7743676dd96d524a60943a78ec.woff") format("woff");
+  font-family: "HarmoniaSansProCyr";
+  src: local("HarmoniaSansProCyr-Regular"),
+    url("https://nomail.com.ua/files/woff/7df2efaa5334fd30271ef112328cded4.woff") format("woff");
+}
+
+* {
+  font-family: "HarmoniaSansProCyr";
+}
+
+input {
+  min-height: 40px;
+  box-sizing: border-box;
+}
+
+button {
+  min-height: 40px;
+  box-sizing: border-box;
+  max-height: 0;
+  height: fit-content;
+  border: 0;
+  background: transparent;
+}
+
+.main {
+  padding: 40px;
+  min-height: 934px;
+  min-width: 1080px;
+}
+
+.icon-button {
+  margin: 0;
+  padding: 0;
+}

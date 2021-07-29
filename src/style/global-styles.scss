@@ -1,0 +1,19 @@
+%default-font {
+  color: #11223E;
+  font-size: 14px;
+}
+
+%large-font {
+  @extend %default-font;
+  font-size: 16px;
+}
+
+%small-font {
+  @extend %default-font;
+  font-size: 12px;
+}
+
+%small-secondary-font {
+  @extend %small-font;
+  color: rgba($color: #11223E, $alpha: 0.3)
+}

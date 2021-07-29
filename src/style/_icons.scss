@@ -1,0 +1,28 @@
+@import "./mixins";
+
+.trash-icon {
+  display: inline-block;
+  background: url(../public/static/img/trash.svg) no-repeat;
+  @include calcWidthByTemplate(18px);
+  @include calcHeightByTemplate(18px);
+  min-width: 18px;
+  min-height: 18px;
+}
+
+.reload-icon {
+  display: inline-block;
+  background: url(../public/static/img/reload.svg) no-repeat;
+  @include calcWidthByTemplate(17px);
+  @include calcHeightByTemplate(16px);
+  min-width: 17px;
+  min-height: 16px;
+}
+
+.rocket-icon {
+  display: inline-block;
+  background: url(../public/static/img/rocket.svg) no-repeat;
+  @include calcWidthByTemplate(20px);
+  @include calcHeightByTemplate(18px);
+  min-width: 20px;
+  min-height: 18px;
+}
