@@ -5,25 +5,30 @@
 .header {
   display: flex;
   justify-content: space-between;
-  max-height: 40px;
-  padding-bottom: 40px;
+  min-height: 40px;
+  margin-bottom: (40px / $minViewportHeight * 100) * 1vh;
  
   .search-form {
     display: flex;
 
     .search-form__input {
-      min-width: 240px;
-      margin-right: 20px;
+      margin-right: 20px / $minViewportWidth * 100vw;
+      padding-left: 16px / $minViewportWidth * 100vw;
+      @include calcSizeByWidth(240px, 40px);
     }
 
     .search-form__buttons {
       display: flex;
-      .button:first-child {
-        border-radius: 5px 0 0 5px;
-      }
+      @include calcSizeByViewport(210px, 40px);
+      .button {
+        width: 50%;
+        &:first-child {
+          border-radius: 1vh 0 0 1vh;
+        }
 
-      .button:last-child {
-        border-radius: 0 5px 5px 0;
+        &:last-child {
+          border-radius: 0 1vh 1vh 0;
+        }
       }
     }
   }
@@ -31,13 +36,12 @@
   .control {
     button {
       &:first-child {
-        margin-right: 20px;
+        margin-right: (20px / $minViewportWidth * 100) * 1vw;
       }
     }
     .control-button {
       &.secondary {
         min-width: 169px;
-        @include calcWidthByTemplate(169px);
       }
     }
   }

@@ -3,26 +3,67 @@
 .trash-icon {
   display: inline-block;
   background: url(../public/static/img/trash.svg) no-repeat;
-  @include calcWidthByTemplate(18px);
-  @include calcHeightByTemplate(18px);
-  min-width: 18px;
-  min-height: 18px;
+  @include calcSizeByWidth(18px, 18px);
 }
 
 .reload-icon {
   display: inline-block;
   background: url(../public/static/img/reload.svg) no-repeat;
-  @include calcWidthByTemplate(17px);
-  @include calcHeightByTemplate(16px);
-  min-width: 17px;
-  min-height: 16px;
+  @include calcSizeByWidth(17px, 16px);
 }
 
 .rocket-icon {
   display: inline-block;
   background: url(../public/static/img/rocket.svg) no-repeat;
-  @include calcWidthByTemplate(20px);
-  @include calcHeightByTemplate(18px);
-  min-width: 20px;
-  min-height: 18px;
+  @include calcSizeByWidth(20px, 18px);
+}
+
+.status-icon {
+  display: inline-block;
+  background: url(../public/static/img/status.svg) no-repeat;
+  @include calcSizeByWidth(81px, 18px);
+}
+
+.alert-icon {
+  display: inline-block;
+  background: url(../public/static/img/alert.svg) no-repeat;
+  @include calcSizeByWidth(14px, 14px);
+}
+
+.content-image-1 {
+  display: inline-block;
+  background: url(../public/static/img/content-image-1.svg) no-repeat;
+  @include calcSizeByWidth(24px, 24px);
+}
+.content-image-2 {
+  display: inline-block;
+  background: url(../public/static/img/content-image-2.svg) no-repeat;
+  @include calcSizeByWidth(24px, 24px);
+}
+.content-image-3 {
+  display: inline-block;
+  background: url(../public/static/img/content-image-3.svg) no-repeat;
+  @include calcSizeByWidth(24px, 24px);
+}
+
+.dropdown-icon {
+  display: inline-block;
+  @include calcSizeByWidth(6px, 3px);
+  padding-right: 0.2rem;
+  &.red {
+    background: url(../public/static/img/red-bottom-arrow.svg) no-repeat;
+  }
+
+  &.green {
+    background: url(../public/static/img/green-up-arrow.svg) no-repeat;
+  }
+  
+  &.gray {
+    background: url(../public/static/img/gray-bottom-arrow.svg) no-repeat;
+  }
+}
+
+.dropdown-toggle-icon {
+  @include calcSizeByWidth(6px, 10px);
+  background: url(../public/static/img/black-outline-right-arrow.svg) no-repeat;
 }

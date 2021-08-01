@@ -1,15 +1,23 @@
 @import "../mixins";
-@import "../global-styles.scss";
+@import "../fonts.scss";
+
+%simple-button {
+  background: #ffffff;
+  padding: 0 20px;
+  box-sizing: border-box;
+
+  &:active {
+    transform: translateY(2px);
+    transition-duration: 0.05s;
+  }
+}
 
 .button {
-  background: #ffffff;
-  
   border: 1px solid rgba(34, 62, 105, 0.2);
   color: #11223e;
-  font-size: 14px;
-  min-width: 105px;
-
-  @include calcWidthByTemplate(105px);
+  @extend %simple-button;
+  @include calcSizeByWidth(105px, 40px);
+  @extend %default-font;
 
   &:disabled {
     background: rgba(255, 255, 255, 0.07);
@@ -21,32 +29,21 @@
     background-color: rgba($color: #000000, $alpha: 0.12);
   }
 
-  &:active {
-    transform: translateY(2px);
-    transition-duration: 0.05s;
-  }
 }
 
 .contur-button {
-  background: #ffffff;
   border: 1px solid #223e69;
-  mix-blend-mode: normal;
-  border-radius: 5px;
-
-  @extend %large-font;
+  border-radius: 1vh;
+  @extend %simple-button;
+  @include calcSizeByWidth(142px, 40px);
+  @extend %l-font;
   font-weight: bold;
-  min-width: 142px;
-
-  @include calcWidthByTemplate(142px);
 
   &:hover {
     background-color: rgba($color: #000000, $alpha: 0.12);
   }
 
-  &:active {
-    transform: translateY(2px);
-    transition-duration: 0.05s;
-  }
+
 
   &.secondary {
     background: #fc3969;
@@ -54,6 +51,7 @@
     box-shadow: 0px 3px 7px rgba(252, 57, 105, 0.3);
     border-color: transparent;
     font-weight: inherit;
+    @include calcSizeByWidth(169px, 40px);
 
     &:hover {
       background-color: rgba($color: #fc3969, $alpha: 0.84);

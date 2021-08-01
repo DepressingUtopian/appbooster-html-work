@@ -1,8 +1,10 @@
-.input {
+@import "../mixins";
+
+input {
   background: #ffffff;
   border: 1px solid rgba(34, 62, 105, 0.1);
   border-radius: 5px;
   color: rgba($color: #11223E, $alpha: 0.7);
   padding-left: 16px;
-  font-size: 16px;
+  @extend %default-font;
 }

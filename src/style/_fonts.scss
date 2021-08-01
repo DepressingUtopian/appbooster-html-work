@@ -1,0 +1,42 @@
+$baseSize: calcResponsive(14px, $minViewportWidth, 100vw);
+
+%default-font {
+  color: #11223E;
+  font-size: $baseSize;
+  // line-height: $baseSize * 0.6875;
+}
+
+%l-font {
+  @extend %default-font;
+  font-size: $baseSize * 1.125;
+  // line-height: $baseSize * 1.125 * 0.6875;
+}
+
+%xl-font {
+  @extend %default-font;
+  font-size: $baseSize * 1.222;
+  // line-height: $baseSize * 1.222 * 0.6875;
+}
+
+%xs-font {
+  @extend %default-font;
+  font-size: $baseSize * 0.8333;
+  // line-height: $baseSize * 0.8333 * 0.6875;
+}
+
+%s-font {
+  @extend %default-font;
+  font-size: $baseSize * 0.7143;
+  // line-height: $baseSize * 0.7143 * 0.6875;
+}
+
+%xs-secondary-font {
+  @extend %xs-font;
+  color: rgba($color: #11223E, $alpha: 0.3)
+}
+
+
+%default-secondary-font {
+  @extend %default-font;
+  color: rgba($color: #11223E, $alpha: 0.5)
+}

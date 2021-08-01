@@ -1,82 +1,99 @@
-@import "./global-styles.scss";
+@import "./fonts";
 @import "./mixins";
 
 .table {
   display: flex;
-  max-width: 92vw;
-  .table-column {
-    display: inline-flex;
+  min-width: 1000px;
+  .table__column {
+    display: flex;
     flex-direction: column;
-    padding-bottom: 2vh;
-    min-width: 375px;
+    min-height: 712px;
 
     .column-row {
       display: flex;
-      min-height: 50px;
-      min-width: 375px;
       border: 1px solid rgba($color: #11223e, $alpha: 0.2);
       border-bottom: 0;
-      @include calcHeightByTemplate(50px);
-
+      box-sizing: border-box;
+      @include calcWidthByViewportWidth(375px);
+   
       &:last-child {
         border-bottom: 1px solid rgba($color: #11223e, $alpha: 0.2);
       }
 
-      & > .cell {
+      & > .table__cell {
         border-right: 1px solid rgba($color: #11223e, $alpha: 0.2);
         display: flex;
         align-items: center;
-        // padding: 0 14px;
         box-sizing: border-box;
+        @include calcHeightByViewportWidth(375px, 50px);
 
         &:first-child {
-          padding: 0 14px;
+          padding: 0 (14px / $minViewportWidth * 100vw);
           flex: 6 0 283px;
         }
 
         &:last-child {
           border: 0;
-          flex: 1 0 89px;
+          flex: 2 0 89px;
           justify-content: center;
         }
 
-        &.dropdown-cell {
+        &.table__dropdown-cell {
           justify-content: space-between;
 
           & > div {
             display: flex;
           }
 
-          .dropdown-cell__left-content {
+          .table__cell-left-content {
+            align-items: center;
             .checkbox-container {
-              margin-right: 20px;
+              margin-right: 2vw;
             }
           }
 
-          .dropdown-cell__right-content {
+          .table__dropdown-cell-right-content {
             justify-content: space-evenly;
-            align-items: baseline;
-            .rating-star {
-              line-height: 14px;
-              margin-right: 10%;
-
-              &:hover {
-                cursor: pointer;
-              }
-
-              &:hover::before,
-              &[checked]::before {
-                content: "\2605";
+            align-items: center;
+            .rating-star-container {
+              display: inline-block;
+              position: relative;
+              
+              cursor: pointer;
+              padding-right: 0.4rem;
+              
+              input[type=checkbox] {
                 position: absolute;
-                color: #f5a623;
+                top: 0;
+                left: 0;
+                height: 0;
+                width: 0;
+                opacity: 0;
+
+                &:hover ~ .rating-star {
+                  color: #F5A623;
+                }
+
+                &:checked ~ .rating-star::after {
+                  content: "\2605";
+                  color: #f5a623;
+                  position: absolute;
+                  cursor: pointer;
+                  top: 0;
+                  left: 0;
+                }
+              }
+              .rating-star {
+                width: 100%;
+                height: 100%;
+                line-height: 2vw * 0.6875;
+                font-size: 2vw;
               }
             }
           }
         }
 
-        &.eval-freq-cell {
-          @extend %default-font;
-          line-height: 8px;
+        &.table__cell-eval-freq {
           justify-content: center;
         }
       }
@@ -84,40 +101,44 @@
       &.dropdown-content-row {
         display: flex;
         border-right: 0;
-        padding: 20px 54px;
+        padding: (20px / $minViewportHeight * 100vw) (54px / $minViewportWidth * 100vw);
         height: 100%;
 
         .button {
           width: auto;
-          font-size: 14px;
-          line-height: 10px;
           font-weight: 600;
-          border-radius: 5px;
         }
       }
     }
 
-    .table-column__header {
-      @include calcWidthByTemplate(375px);
-      .cell > * {
-        margin-right: 20px;
+    .table__column-header {
+      .table__cell {
+
+        &:first-child > * {
+          margin-right: 2vw;
+
+          &:last-child {
+            margin-right: 0;
+          }
+        }
 
         &:last-child {
           margin: 0;
         }
       }
 
-      .eval-freq-header {
-        @extend %small-secondary-font;
-        line-height: 125%;
+      .eval-freq-header > .eval-freq-header__text {
+        @extend %xs-secondary-font;
+        line-height: 1rem;
+        margin: 0 0.4vw;
       }
     }
   }
 
-  .table-column-dates {
+  .table__column-dates {
     overflow-x: scroll;
 
-    .column-dates-row {
+    .table__column-dates-row {
       display: flex;
       border-top: 1px solid rgba($color: #11223e, $alpha: 0.07);
       border-right: 1px solid rgba($color: #11223e, $alpha: 0.07);
@@ -127,25 +148,19 @@
         border-bottom: 1px solid rgba($color: #11223e, $alpha: 0.07);
       }
 
-      .cell {
+      .table__cell {
         display: flex;
         border-right: 1px solid rgba($color: #11223e, $alpha: 0.07);
-        min-width: 50px;
-        min-height: 50px;
         box-sizing: border-box;
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        flex: 0 0 50px;
+        @include calcSizeByWidth(43px, 50px);
+        flex: 1 0 43px;
         position: relative;
 
         &:last-child {
           border: 0;
-        }
-
-        .cell__text {
-          @extend %default-font;
-          line-height: 8px;
         }
 
         .change-parameter {
@@ -153,33 +168,20 @@
           top: 0;
           right: 0;
           display: flex;
-          margin: 5px 2px;
+          margin: 4/43 * 100 * 1% 2/43 * 100 * 1%;
           align-items: center;
 
-          .change-parameter__icon {
-            width: 6px;
-            height: 3px;
-          }
-
           .change-parameter__value {
-            font-size: 12px;
+            @extend %s-font;
           }
 
           &.red {
-            .change-parameter__icon {
-              background: url(../public/static/img/dropdown-red-bottom-arrow.svg) no-repeat;
-            }
-
             .change-parameter__value {
               color: #d0021b;
             }
           }
 
           &.green {
-            .change-parameter__icon {
-              background: url(../public/static/img/dropdown-green-up-arrow.svg) no-repeat;
-            }
-
             .change-parameter__value {
               color: #417505;
             }
@@ -193,52 +195,39 @@
         &.highlighted-green {
           background: #faffee;
         }
+
+        .statistic-value {
+          display: inline-flex;
+          position: absolute;
+          bottom: 0;
+          justify-content: center;
+          align-items: center;
+          background-color: rgba($color: #75b926, $alpha: 0.3);
+          font-weight: 400;
+          @extend %s-font;
+          @include calcSizeByWidth(22px, 11px);
+          box-sizing: border-box;
+          border-radius: 0.5vh;
+          margin: 4 / 43 * 100 * 1% 0;
+        }
       }
 
-      &.column-dates-row-header {
-        .cell__text {
-          @extend %small-secondary-font;
-          line-height: 8px;
+      &.table__column-dates-row-header {
+        .table__cell__text {
+          @extend %xs-secondary-font;
+          line-height: 1rem;
         }
       }
 
       &.dropdown-content-row {
         border: 0;
-        border-right: 1px solid rgba(17,34,62,0.07);
+        border-right: 1px solid rgba(17, 34, 62, 0.07);
+        border-bottom: 1px solid transparent;
 
-        .cell {
+        .table__cell {
           border: 0;
-          .content-image-1 {
-            width: 24px;
-            height: 24px;
-            background: url(../public/static/img/content-image-1.svg);
-          }
-          .content-image-2 {
-            width: 24px;
-            height: 24px;
-            background: url(../public/static/img/content-image-2.svg);
-          }
-          .content-image-3 {
-            width: 24px;
-            height: 24px;
-            background: url(../public/static/img/content-image-3.svg);
-          }
         }
       }
     }
-  }
-
-  .statistic-value {
-    display: inline-flex;
-    position: absolute;
-    bottom: 0;
-    justify-content: center;
-    min-width: 22px;
-    min-height: 11px;
-    background-color: rgba($color: #75b926, $alpha: 0.3);
-    font-size: 10px;
-    font-weight: 400;
-    border-radius: 3px;
-    margin-bottom: 4px;
   }
 }

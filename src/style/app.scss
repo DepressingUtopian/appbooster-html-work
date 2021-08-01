@@ -3,6 +3,8 @@
 @import "checkbox";
 @import "table";
 @import "icons";
+@import "./fonts";
+
 
 @font-face {
   font-family: "HarmoniaSansProCyr-Bold";
@@ -25,19 +27,22 @@ input {
 button {
   min-height: 40px;
   box-sizing: border-box;
-  max-height: 0;
-  height: fit-content;
   border: 0;
   background: transparent;
 }
 
 .main {
-  padding: 40px;
-  min-height: 934px;
-  min-width: 1080px;
+  padding: 40px / $maxViewportWidth * 100vw;
+  min-height: $minViewportHeight;
+  min-width: $minViewportWidth;
+  max-height: $maxViewportHeight;
 }
 
 .icon-button {
   margin: 0;
   padding: 0;
+}
+
+* {
+  @extend %default-font;
 }

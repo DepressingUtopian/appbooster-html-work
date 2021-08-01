@@ -1,12 +1,65 @@
-$templateHeight: 934px;
-$templateWidth: 1080px;
+@import "./global-var";
 
-@mixin calcHeightByTemplate($baseHeight) {
-  height: $baseHeight / $templateHeight * 100vh;
+// https://css-tricks.com/snippets/sass/strip-unit-function/
+@function strip-unit($number) {
+    @return $number / ($number * 0 + 1);
 }
 
-@mixin calcWidthByTemplate($baseWidth) {
-  width: $baseWidth / $templateWidth * 100vw;
+//calc([minimum size] + ([maximum size] - [minimum size]) * ((100vw - [minimum viewport width]) / ([maximum viewport width] - [minimum viewport width])));
+@function calcFluidWidth($minSize, $maxSize, $minViewportWidth, $maxViewportWidth) {
+  @return calc(#{$minSize} + #{strip-unit($maxSize - $minSize)} * ((100vw - #{$minViewportWidth}) / #{strip-unit($maxViewportWidth - $minViewportWidth)}));
 }
 
+//https://css-tricks.com/snippets/css/fluid-typography/
+@mixin fluid-type($min-vw, $max-vw, $min-font-size, $max-font-size) {
+  $u1: unit($min-vw);
+  $u2: unit($max-vw);
+  $u3: unit($min-font-size);
+  $u4: unit($max-font-size);
 
+  //проверка типов
+  @if $u1 == $u2 and $u1 == $u3 and $u1 == $u4 {
+    & {
+      font-size: $min-font-size;
+      @media screen and (min-width: $min-vw) {
+        font-size: calcFluidWidth($min-font-size, $max-font-size, $min-vw, $max-vw);
+      }
+      @media screen and (min-width: $max-vw) {
+        font-size: $max-font-size;
+      }
+    }
+  }
+}
+
+@function calcResponsive($baseSize, $viewportSize, $maxSize) {
+  @return $baseSize / $viewportSize * $maxSize;
+}
+
+@mixin calcWidthByViewportWidth($minWidth) {
+  min-width: $minWidth;
+  width: calcResponsive($minWidth, $minViewportWidth, 100vw);
+}
+
+@mixin calcHeightByViewportHeight($minHeight) {
+  min-height: $minHeight;
+  height: calcResponsive($minHeight, $minViewportHeight, 100vh);
+}
+
+@mixin calcHeightByViewportWidth($minWidth, $minHeight) {
+  min-height: $minHeight;
+  $calcWidth: calcResponsive($minWidth, $minViewportWidth, 100vw);
+  height: $calcWidth / ($minWidth / $minHeight);
+}
+
+@mixin calcSizeByViewport($minWidth, $minHeight) {
+  @include calcWidthByViewportWidth($minWidth);
+  @include calcHeightByViewportHeight($minHeight);
+}
+
+// Расчет размера относительно ширины
+@mixin calcSizeByWidth($minWidth, $minHeight) {
+  @include calcWidthByViewportWidth($minWidth);
+  min-height: $minHeight;
+  $calcWidth: calcResponsive($minWidth, $minViewportWidth, 100vw);
+  height: $calcWidth / ($minWidth / $minHeight);
+}
