@@ -1,11 +1,11 @@
 .banner {
   width: 100%;
   background: rgba($color: #f8e71c, $alpha: 0.15);
-  border-radius: 1vh;
+  border-radius: 1vw;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: (40px / $minViewportHeight * 100) * 1vh;
+  margin-bottom: (30px / $minViewportHeight * 100) * 1vw;
   @include calcHeightByViewportWidth(1000px, 40px);
 
   .banner-content {
